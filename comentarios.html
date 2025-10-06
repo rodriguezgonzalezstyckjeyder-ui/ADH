@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Comentarios - Panel de Administración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0b0b0b;
+            --primary-dark: #050505;
+            --secondary: #2b2b2b;
+            --success: #4cc9f0;
+            --danger: #c0392b;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border: #2e2e2e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--light);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+        
+        .header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .admin-badge {
+            display: inline-block;
+            background: #0b0b0b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            vertical-align: middle;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .comments-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .comments-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .comments-list {
+            background: #0f0f0f;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            height: fit-content;
+        }
+        
+        .comments-header {
+            background: linear-gradient(90deg,var(--primary-dark),var(--primary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .comments-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .comments-count {
+            background: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .comments-body {
+            padding: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .comment {
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--success);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            color: var(--success);
+        }
+        
+        .comment-date {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+        
+        .comment-content {
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .comment-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .comment-action {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+        }
+        
+        .comment-action:hover {
+            color: var(--light);
+        }
+        
+        .comment-action.delete:hover {
+            color: var(--danger);
+        }
+        
+        .add-comment {
+            background: #0f0f0f;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+        
+        .add-comment-header {
+            background: linear-gradient(90deg,var(--primary-dark),var(--primary));
+            color: white;
+            padding: 20px;
+        }
+        
+        .add-comment-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .add-comment-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--light);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #121212;
+            color: var(--light);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #0b0b0b, #1a1a1a);
+            color: white;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, #050505, #0f0f0f);
+        }
+        
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-success {
+            background: #122b12;
+            color: #b6f0c8;
+            border: 1px solid rgba(182,240,200,0.12);
+        }
+
+        .alert-error {
+            background: #3a0b0b;
+            color: #ffd6d6;
+            border: 1px solid rgba(255,214,214,0.08);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+        
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+        
+        .search-box input {
+            padding-left: 40px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+        
+        .sort-select {
+            background: #121212;
+            color: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-bar {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sistema de Comentarios <span class="admin-badge">Admin</span></h1>
+            <p>Gestiona y modera los comentarios de tu sitio web</p>
+        </div>
+        
+        <div class="comments-container">
+            <div class="comments-list">
+                <div class="comments-header">
+                    <h2>Comentarios Recientes</h2>
+                    <div class="comments-count" id="commentsCount">5 comentarios</div>
+                </div>
+                
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchComments" class="form-control" placeholder="Buscar comentarios...">
+                    </div>
+                    <select class="sort-select" id="sortComments">
+                        <option value="newest">Más recientes</option>
+                        <option value="oldest">Más antiguos</option>
+                        <option value="author">Por autor</option>
+                    </select>
+                </div>
+                
+                <div class="comments-body" id="commentsList">
+                    <!-- Los comentarios se cargarán aquí dinámicamente -->
+                </div>
+            </div>
+            
+            <div class="add-comment">
+                <div class="add-comment-header">
+                    <h2>Agregar Comentario</h2>
+                </div>
+                
+                <div class="add-comment-body">
+                    <!-- Alertas -->
+                    <div class="alert alert-success" id="successAlert">
+                        <i class="fas fa-check-circle"></i> <span id="successMessage">Comentario agregado exitosamente</span>
+                    </div>
+                    
+                    <div class="alert alert-error" id="errorAlert">
+                        <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">Ha ocurrido un error</span>
+                    </div>
+                    
+                    <form id="commentForm">
+                        <div class="form-group">
+                            <label for="commentAuthor">Nombre</label>
+                            <input type="text" id="commentAuthor" class="form-control" placeholder="Tu nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="commentEmail">Correo Electrónico</label>
+                            <input type="email" id="commentEmail" class="form-control" placeholder="tu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="commentContent">Comentario</label>
+                            <textarea id="commentContent" class="form-control" placeholder="Escribe tu comentario aquí..." required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Publicar Comentario</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos DOM
+        const commentsList = document.getElementById('commentsList');
+        const commentForm = document.getElementById('commentForm');
+        const commentsCount = document.getElementById('commentsCount');
+        const successAlert = document.getElementById('successAlert');
+        const errorAlert = document.getElementById('errorAlert');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const searchComments = document.getElementById('searchComments');
+        const sortComments = document.getElementById('sortComments');
+
+        // Datos de ejemplo para comentarios
+        let comments = [
+            {
+                id: 1,
+                author: "María González",
+                email: "maria@ejemplo.com",
+                content: "Excelente artículo, muy informativo y bien estructurado. Me ayudó a comprender mejor el tema.",
+                date: "2023-10-15T14:30:00"
+            },
+            {
+                id: 2,
+                author: "Carlos Rodríguez",
+                email: "carlos@empresa.com",
+                content: "Me gustaría ver más ejemplos prácticos en futuras publicaciones. ¡Gracias por el contenido!",
+                date: "2023-10-14T09:15:00"
+            },
+            {
+                id: 3,
+                author: "Ana López",
+                email: "ana.lopez@correo.com",
+                content: "Interesante perspectiva sobre el tema. Comparto la opinión del autor en varios puntos.",
+                date: "2023-10-13T16:45:00"
+            },
+            {
+                id: 4,
+                author: "Pedro Martínez",
+                email: "pedro.m@dominio.com",
+                content: "¿Podrían profundizar en el punto 3? Me pareció un poco superficial la explicación.",
+                date: "2023-10-12T11:20:00"
+            },
+            {
+                id: 5,
+                author: "Laura Sánchez",
+                email: "laura.s@mail.com",
+                content: "Muy buen trabajo. Los gráficos ayudan mucho a comprender los conceptos complejos.",
+                date: "2023-10-11T18:05:00"
+            }
+        ];
+
+        // Función para formatear fecha
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Función para mostrar comentarios
+        function renderComments(commentsToRender = comments) {
+            commentsList.innerHTML = '';
+            
+            if (commentsToRender.length === 0) {
+                commentsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <p>No se encontraron comentarios</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            commentsToRender.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">${comment.author}</div>
+                        <div class="comment-date">${formatDate(comment.date)}</div>
+                    </div>
+                    <div class="comment-content">${comment.content}</div>
+                    <div class="comment-actions">
+                        <button class="comment-action reply" data-id="${comment.id}">
+                            <i class="fas fa-reply"></i> Responder
+                        </button>
+                        <button class="comment-action delete" data-id="${comment.id}">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                `;
+                commentsList.appendChild(commentElement);
+            });
+            
+            // Actualizar contador
+            commentsCount.textContent = `${commentsToRender.length} comentario${commentsToRender.length !== 1 ? 's' : ''}`;
+            
+            // Agregar event listeners a los botones de eliminar
+            document.querySelectorAll('.comment-action.delete').forEach(button => {
+                button.addEventListener('click', function() {
+                    const commentId = parseInt(this.getAttribute('data-id'));
+                    deleteComment(commentId);
+                });
+            });
+        }
+
+        // Función para agregar un comentario
+        function addComment(author, email, content) {
+            const newComment = {
+                id: comments.length > 0 ? Math.max(...comments.map(c => c.id)) + 1 : 1,
+                author,
+                email,
+                content,
+                date: new Date().toISOString()
+            };
+            
+            comments.unshift(newComment);
+            renderComments();
+            showAlert(successAlert, "Comentario agregado exitosamente");
+        }
+
+        // Función para eliminar un comentario
+        function deleteComment(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este comentario?")) {
+                comments = comments.filter(comment => comment.id !== id);
+                renderComments();
+                showAlert(successAlert, "Comentario eliminado exitosamente");
+            }
+        }
+
+        // Función para buscar comentarios
+        function searchCommentsFunc(query) {
+            const filteredComments = comments.filter(comment => 
+                comment.author.toLowerCase().includes(query.toLowerCase()) ||
+                comment.content.toLowerCase().includes(query.toLowerCase()) ||
+                comment.email.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            renderComments(filteredComments);
+        }
+
+        // Función para ordenar comentarios
+        function sortCommentsFunc(sortBy) {
+            let sortedComments = [...comments];
+            
+            switch(sortBy) {
+                case 'newest':
+                    sortedComments.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    break;
+                case 'oldest':
+                    sortedComments.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    break;
+                case 'author':
+                    sortedComments.sort((a, b) => a.author.localeCompare(b.author));
+                    break;
+            }
+            
+            renderComments(sortedComments);
+        }
+
+        // Mostrar alertas
+        function showAlert(alertElement, message) {
+            alertElement.querySelector('span').textContent = message;
+            alertElement.style.display = 'block';
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Inicializar la aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            // Renderizar comentarios iniciales
+            renderComments();
+            
+            // Manejar envío del formulario
+            commentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const author = document.getElementById('commentAuthor').value;
+                const email = document.getElementById('commentEmail').value;
+                const content = document.getElementById('commentContent').value;
+                
+                // Validaciones básicas
+                if (!author || !email || !content) {
+                    showAlert(errorAlert, "Por favor, completa todos los campos");
+                    return;
+                }
+                
+                if (!email.includes('@')) {
+                    showAlert(errorAlert, "Por favor, ingresa un correo electrónico válido");
+                    return;
+                }
+                
+                // Agregar comentario
+                addComment(author, email, content);
+                
+                // Limpiar formulario
+                commentForm.reset();
+            });
+            
+            // Manejar búsqueda de comentarios
+            searchComments.addEventListener('input', function() {
+                searchCommentsFunc(this.value);
+            });
+            
+            // Manejar ordenamiento de comentarios
+            sortComments.addEventListener('change', function() {
+                sortCommentsFunc(this.value);
+            });
+        });
+    </script>
+</body>
+</html>

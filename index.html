@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armería Deportivos Herrera | Especialistas en Armas Deportivas</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto+Condensed:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Variables de colores para tema premium */
+    :root {
+      --bg-dark: #020202;
+      --bg-card: #131212;
+      --bg-navbar: #0f0f0f;
+      --primary-color: #9d0000;
+      --secondary-color: #b10e0e;
+      --accent-color: #ff3636;
+      --gold-color: #d4af37;
+      --text-light: #ffffff;
+      --text-muted: #cccccc;
+      --border-dark: #e7dfdf;
+    }
+    
+    /* Estilos generales mejorados */
+    body {
+      font-family: 'Roboto Condensed', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-light);
+      background-color: var(--bg-dark);
+      line-height: 1.7;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(233, 223, 223, 0.03) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(226, 215, 215, 0.03) 0%, transparent 25%);
+    }
+    
+    .main-content {
+      flex: 1;
+    }
+    
+    h1, h2, h3, h4, h5, .navbar-brand {
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    
+    .display-4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    
+    /* Barra de navegación premium */
+    .navbar {
+      background-color: rgba(22, 22, 22, 0.95);
+      box-shadow: 0 2px 20px rgba(26, 25, 25, 0.8);
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid var(--border-dark);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(8px);
+    }
+    
+    .navbar.shrink {
+      padding: 0.5rem 1rem;
+      background-color: rgba(5, 5, 5, 0.98);
+      box-shadow: 0 2px 25px rgba(0, 0, 0, 0.9);
+    }
+    
+    .navbar-brand {
+      font-weight: 800;
+      color: var(--text-light) !important;
+      font-size: 1.6rem;
+      transition: all 0.4s ease;
+      letter-spacing: 1px;
+      position: relative;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+    }
+    
+    .navbar-brand img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    
+    .navbar-brand::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--gold-color));
+      transition: width 0.4s ease;
+    }
+    
+    .navbar-brand:hover::after {
+      width: 100%;
+    }
+    
+    .navbar.shrink .navbar-brand {
+      font-size: 1.4rem;
+    }
+    
+    .navbar-nav .nav-link {
+      color: var(--text-light) !important;
+      font-weight: 500;
+      margin: 0 0.5rem;
+      transition: all 0.4s ease;
+      position: relative;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--gold-color));
+      transition: width 0.4s ease;
+    }
+    
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after {
+      width: 100%;
+    }
+    
+    .navbar-nav .nav-link:hover {
+      color: var(--accent-color) !important;
+      transform: translateY(-3px);
+    }
+    
+    .navbar-toggler {
+      border-color: var(--text-light);
+      background-color: rgba(252, 249, 249, 0.1);
+      padding: 0.5rem;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    /* Botón de perfil en la esquina superior derecha */
+    .profile-container {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+  background: none;
+  margin: 0;
+    }
+    
+    .profile-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      font-size: 1.2rem;
+    }
+    
+    .profile-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 42, 42, 0.5);
+    }
+    
+    /* Menú desplegable del perfil */
+    .profile-dropdown {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: rgba(30, 30, 30, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 15px;
+      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+    
+    .profile-dropdown.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .profile-dropdown .dropdown-item {
+      color: var(--text-light);
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+    
+    .profile-dropdown .dropdown-item i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .profile-dropdown .dropdown-item:hover {
+      background: rgba(157, 0, 0, 0.2);
+      color: var(--accent-color);
+    }
+    
+    .profile-dropdown .dropdown-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 10px 0;
+    }
+    
+    /* Imagen centrada premium */
+    .img-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+    
+    .img-container::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      right: 15px;
+      bottom: 15px;
+      border: 2px solid var(--gold-color);
+      border-radius: 8px;
+      opacity: 0.4;
+      z-index: -1;
+      transition: all 0.4s ease;
+    }
+    
+    .img-fluid {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+      transition: all 0.5s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      filter: brightness(0.95);
+    }
+    
+    .img-fluid:hover {
+      transform: scale(1.04);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      filter: brightness(1.05);
+    }
+    
+    .img-container:hover::before {
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      opacity: 0.6;
+    }
+    
+    /* Secciones premium */
+    section {
+      padding: 7rem 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    section::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(157, 0, 0, 0.08) 0%, transparent 40%),
+                 radial-gradient(circle at 80% 20%, rgba(157, 0, 0, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 4rem;
+      color: var(--text-light);
+      position: relative;
+      padding-bottom: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), var(--gold-color), transparent);
+      border-radius: 2px;
+    }
+    
+    /* Tarjetas de productos premium */
+    .card {
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      transition: all 0.5s ease;
+      background-color: var(--bg-card);
+      color: var(--text-light);
+      height: 100%;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--gold-color));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+    
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-link {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .card-link:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+    }
+    
+    .card-img-top {
+      height: 240px;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+      filter: brightness(0.85);
+    }
+    
+    .card:hover .card-img-top {
+      transform: scale(1.1);
+      filter: brightness(1);
+    }
+    
+    .card-title {
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    
+    .card-text {
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    
+    /* Botones premium */
+    .btn-primary {
+      background: linear-gradient(145deg, var(--primary-color), var(--secondary-color));
+      border: none;
+      padding: 1rem 2.5rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.4s ease;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      text-transform: uppercase;
+      font-family: 'Oswald', sans-serif;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, var(--accent-color), var(--gold-color));
+      transition: all 0.5s ease;
+      z-index: -1;
+    }
+    
+    .btn-primary:hover::before {
+      left: 0;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(255, 42, 42, 0.5);
+    }
+    
+    /* Footer premium */
+    footer {
+      background: linear-gradient(to top, var(--bg-navbar), #000);
+      color: var(--text-light);
+      padding: 5rem 0 3rem;
+      border-top: 1px solid var(--border-dark);
+      text-align: center;
+      margin-top: auto;
+      width: 100%;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), var(--gold-color), transparent);
+    }
+    
+    .social-icons a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 45px;
+      height: 45px;
+      background: var(--bg-card);
+      color: var(--text-light);
+      border-radius: 50%;
+      margin: 0 10px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      font-size: 1.2rem;
+    }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+    
+    .social-icons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, var(--primary-color), var(--accent-color));
+      opacity: 0;
+      transition: all 0.4s ease;
+      border-radius: 50%;
+    }
+    
+    .social-icons a:hover::before {
+      opacity: 1;
+    }
+    
+    .social-icons a i {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .social-icons a:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(255, 42, 42, 0.4);
+    }
+    
+    /* Animaciones de entrada premium */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Elementos decorativos premium */
+    .decorative-line {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary-color), var(--gold-color), transparent);
+      width: 80%;
+      margin: 3rem auto;
+      border-radius: 3px;
+    }
+    
+    .highlight-text {
+      color: var(--accent-color);
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(255, 54, 54, 0.3);
+    }
+    
+    .gold-text {
+      color: var(--gold-color);
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    }
+    
+    /* Mejoras específicas para la sección de inicio */
+    #inicio {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('imagenes/imagen ADH50.webp') center/cover no-repeat fixed;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #inicio::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    
+    #inicio .container {
+      background-color: rgba(10, 10, 10, 0.8);
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 1;
+    }
+    
+    #inicio h1 {
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(to right, #fff, var(--accent-color), var(--gold-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 15px rgba(255, 54, 54, 0.3);
+      letter-spacing: 2px;
+    }
+    
+    #inicio .lead {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+    
+    #inicio .lead::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      top: -2px;
+    }
+    
+    #inicio .img-container {
+      margin-top: 3rem;
+    }
+    
+    /* Mejoras para la sección de ubicación */
+    .contact-info {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .contact-info li {
+      margin-bottom: 1.5rem;
+      padding-left: 2.5rem;
+      position: relative;
+      font-size: 1.1rem;
+    }
+    
+    .contact-info li i {
+      position: absolute;
+      left: 0;
+      top: 0.3rem;
+      color: var(--accent-color);
+      font-size: 1.3rem;
+      width: 30px;
+      text-align: center;
+    }
+    
+    /* Efecto de partículas de fondo optimizado */
+    .particles-container {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      animation: float 20s infinite linear;
+      opacity: 0;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Botón de WhatsApp flotante */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: #FFF;
+      border-radius: 50px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+    }
+
+      /* Botón de chat rojo encima del logo de WhatsApp */
+      .chat-btn {
+        position: fixed;
+        width: 60px; /* igual que whatsapp-float */
+        height: 60px; /* igual que whatsapp-float */
+        bottom: 95px; /* más arriba */
+        right: 25px;  /* alineado con whatsapp-float */
+        background-color: #d90429; /* rojo solicitado */
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 18px rgba(217, 4, 41, 0.35);
+        z-index: 200; /* arriba del whatsapp */
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+        border: 2px solid rgba(255,255,255,0.06);
+        font-size: 22px;
+      }
+
+      .chat-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 26px rgba(217, 4, 41, 0.45);
+      }
+
+      .chat-btn svg {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+    }
+    
+    /* Mejoras para testimonios */
+    .testimonial-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1rem 0;
+      position: relative;
+      border-left: 4px solid var(--gold-color);
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--gold-color);
+    }
+    
+    /* Mejoras para el mapa */
+    .map-container {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      height: 400px;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(0.2) contrast(1.2) brightness(0.9);
+    }
+    
+    /* Responsive premium */
+    @media (max-width: 992px) {
+      #inicio h1 {
+        font-size: 2.8rem;
+      }
+      
+      .navbar-brand {
+        font-size: 1.4rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+      
+      .navbar-brand {
+        font-size: 1.3rem;
+      }
+      
+      section {
+        padding: 5rem 0;
+        min-height: auto;
+      }
+      
+      #inicio h1 {
+        font-size: 2.3rem;
+      }
+      
+      footer .row > div {
+        margin-bottom: 25px;
+        text-align: center;
+      }
+      
+      footer .text-md-end {
+        text-align: center !important;
+      }
+      
+      .img-container::before {
+        display: none;
+      }
+      
+      .card:hover {
+        transform: translateY(-10px);
+      }
+      
+      .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .profile-container {
+    position: fixed !important;
+    top: 24px !important;
+    right: 7mm !important;
+        z-index: 1100 !important;
+        margin: 0 !important;
+      }
+      
+      .profile-btn {
+  width: 28mm;
+  height: 28mm;
+        font-size: 1rem;
+      }
+      
+      .profile-dropdown {
+        min-width: 180px;
+        top: 50px;
+      }
+      /* Ajustes para el botón de chat en móviles */
+      .chat-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 80px; /* mantener por encima del whatsapp reducido */
+        right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Botón de perfil convertido en enlace de inicio de sesión -->
+  <div class="profile-container">
+    <a class="profile-btn" id="profileBtn" href="admin-login.html" title="Iniciar sesión">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+  <!-- Barra de navegación premium -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#inicio">
+        Armería Deportivos Herrera
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#productos">Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#servicios">Servicios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#testimonios">Testimonios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#nos-encontramos">Ubicación</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Efecto de partículas optimizado -->
+  <div class="particles-container" id="particles-js"></div>
+
+  <div class="main-content">
+    <!-- Sección de Inicio -->
+    <section id="inicio" class="bg-dark">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-12 fade-in">
+            <h1 class="display-4 fw-bold mb-4">ARMERÍA DEPORTIVOS HERRERA</h1>
+            <p class="lead mb-3">MANTENIMIENTO PREVENTIVO Y CORRECTIVO</p>
+            <p class="lead mb-3">EMBELLECIMIENTO TÁCTICO Y CLÁSICO</p>
+            <p class="lead mb-3"><span class="gold-text">Cerakote | Pavonado | Chapado en oro | Cromado</span></p>
+            <p class="lead mb-3">Licencia DCCAE CGFM</p>
+            <p class="lead mb-4">Ventas de accesorios</p>
+            <div class="mt-4">
+              <a href="https://wa.me/573132578414" target="_blank" class="btn btn-primary me-3">
+                <i class="fab fa-whatsapp me-2"></i> Contactar por WhatsApp
+              </a>
+              <a href="#nos-encontramos" class="btn btn-outline-light">
+                <i class="fas fa-map-marker-alt me-2"></i> Visítanos
+              </a>
+            </div>
+            <p class="text-danger mt-4" style="color: #d90429 !important;"><small>SOLO SE RECIBEN ARMAS CON SUS RESPECTIVOS PERMISOS DE TENENCIA O PORTE VIGENTES</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Productos -->
+    <section id="productos" class="bg-dark">
+      <div class="container">
+        <h2 class="section-title">Productos Destacados</h2>
+        
+        <div class="row justify-content-center">
+          <div class="col-md-5 mb-5 fade-in">
+            <div class="card h-100">
+              <img src="imagenes/imagen ADH40.webp" class="img-fluid card-img-top" alt="Servicios técnicos">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Servicios técnicos</h5>
+                <p class="card-text flex-grow-1">Algunos de nuestros proyectos hasta el momento.</p>
+                <div class="mt-auto">
+                  <a href="servicios-tecnicos.html" class="btn btn-primary w-100">Ver más</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-5 mb-5 fade-in">
+            <div class="card h-100">
+              <img src="imagenes/imagen ADH5.jpg" class="img-fluid card-img-top" alt="Trabajos y restauraciones">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Trabajos y restauraciones</h5>
+                <p class="card-text flex-grow-1">Amplia variedad de modificaciones, embellecimiento y tratamiento del arma con una garantía de aproximadamente 6 a 8 meses.</p>
+                <div class="mt-auto">
+                  <a href="trabajos-restauraciones.html" class="btn btn-primary w-100">Ver más</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Servicios -->
+    <section id="servicios" class="bg-dark">
+      <div class="container">
+        <h2 class="section-title">Nuestros Servicios</h2>
+        
+        <div class="row justify-content-center">
+          <div class="col-md-8 fade-in">
+                          <a href="mantenimiento.html" class="card-link">
+              <div class="card mb-5 h-100">
+                <div class="card-body text-center py-5">
+                  <div class="mb-4">
+                    <i class="fas fa-tools fa-4x text-primary"></i>
+                  </div>
+                  <h3 class="card-title">Mantenimiento y Reparación</h3>
+                  <p class="card-text">Servicio técnico especializado para todo tipo de armas deportivas.</p>
+                  <span class="highlight-text">Más información →</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        
+        <div class="decorative-line"></div>
+        
+        <div class="row mt-5">
+          <div class="col-md-4 fade-in">
+            <div class="text-center p-4">
+              <i class="fas fa-shield-alt fa-3x gold-text mb-3"></i>
+              <h4>Garantía de Calidad</h4>
+              <p class="text-muted">Todos nuestros trabajos incluyen garantía para tu tranquilidad.</p>
+            </div>
+          </div>
+          <div class="col-md-4 fade-in">
+            <div class="text-center p-4">
+              <i class="fas fa-award fa-3x gold-text mb-3"></i>
+              <h4>Profesionalismo</h4>
+              <p class="text-muted">Personal calificado con años de experiencia en el sector.</p>
+            </div>
+          </div>
+          <div class="col-md-4 fade-in">
+            <div class="text-center p-4">
+              <i class="fas fa-clock fa-3x gold-text mb-3"></i>
+              <h4>Entrega Puntual</h4>
+              <p class="text-muted">Cumplimos con los plazos de entrega establecidos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nueva Sección de Testimonios -->
+    <section id="testimonios" class="bg-dark">
+      <div class="container">
+        <h2 class="section-title">Testimonios de Clientes</h2>
+        
+        <div class="row">
+          <div class="col-md-6 fade-in">
+            <div class="testimonial-card">
+              <p class="testimonial-text">"Excelente servicio y atención. Dejé mi arma para mantenimiento y quedó como nueva. Muy profesionales en su trabajo."</p>
+              <p class="testimonial-author">- Carlos M.</p>
+            </div>
+          </div>
+          <div class="col-md-6 fade-in">
+            <div class="testimonial-card">
+              <p class="testimonial-text">"El trabajo de cerakote que realizaron superó mis expectativas. La calidad es excepcional y el acabado perfecto."</p>
+              <p class="testimonial-author">- Andrea R.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Ubicación -->
+    <section id="nos-encontramos" class="bg-dark">
+      <div class="container">
+        <h2 class="section-title">Dónde Encontrarnos</h2>
+        <div class="row">
+          <div class="col-lg-6 fade-in">
+            <ul class="contact-info">
+              <li><i class="fas fa-map-marker-alt"></i> Cl. 9 #37 A - 62 local, Puente Aranda, Bogotá, Cundinamarca</li>
+              <li><i class="fas fa-phone"></i> +57 313 2578414</li>
+              <li><i class="fas fa-envelope"></i> info@armeriadeportivosherrera.com</li>
+              <li><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 AM - 6:00 PM<br>Sábados: 9:00 AM - 2:00 PM</li>
+            </ul>
+            <div class="mt-4">
+              <a href="https://maps.app.goo.gl/WE9iACohxiRQdeTL6" target="_blank" class="btn btn-primary">
+                <i class="fas fa-directions me-2"></i> Cómo llegar
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6 fade-in">
+            <div class="map-container mt-4 mt-lg-0">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.55508395516287!2d-74.10236251361034!3d4.6152464181354365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99ad5cdc89dd%3A0xa056a806b42c6465!2sDeportivos%20Herrera!5e0!3m2!1ses-419!2sco!4v1758837689222!5m2!1ses-419!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-3">Armería Deportivos Herrera</h5>
+          <p class="text-white">Especialistas en armas deportivas con años de experiencia en mantenimiento, reparación y embellecimiento.</p>
+        </div>
+        <div class="col-md-4 mb-4 mb-md-0">
+          <h5 class="mb-3">Enlaces Rápidos</h5>
+          <ul class="list-unstyled">
+            <li><a href="#inicio" class="text-white text-decoration-none">Inicio</a></li>
+            <li><a href="#productos" class="text-white text-decoration-none">Productos</a></li>
+            <li><a href="#servicios" class="text-white text-decoration-none">Servicios</a></li>
+            <li><a href="#nos-encontramos" class="text-white text-decoration-none">Ubicación</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="mb-3">Síguenos</h5>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="text-white mb-0">&copy; 2023 Armería Deportivos Herrera. Todos los derechos reservados.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="text-white mb-0">Licencia DCCAE CGFM</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón de WhatsApp flotante -->
+  <!-- Botón de chat rojo encima del logo de WhatsApp -->
+  <a href="comentarios.html" class="chat-btn" id="chatBtn" title="Chat">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-text" viewBox="0 0 16 16">
+      <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+      <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+    </svg>
+  </a>
+
+  <!-- Botón de WhatsApp flotante -->
+  <a href="https://wa.me/573132578414" target="_blank" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-tsQFvER8S9Q5f6d6E6a5yK5l5g5p5p5p5p5p5p5p5p5p5p5p5p5p5p5p5p5p5p5p5" crossorigin="anonymous"></script>
+  <!-- Login script -->
+  <script src="login.js"></script>
+  <script>
+    // Efecto de reducción de la barra de navegación al hacer scroll
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('shrink');
+      } else {
+        navbar.classList.remove('shrink');
+      }
+    });
+
+    // Animación de elementos al hacer scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    const fadeInOnScroll = function() {
+      fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    };
+    
+    window.addEventListener('scroll', fadeInOnScroll);
+    fadeInOnScroll(); // Ejecutar al cargar la página
+
+    // Efecto de partículas optimizado
+    function createParticles() {
+      const container = document.getElementById('particles-js');
+      const particleCount = Math.min(30, Math.floor(window.innerWidth / 30));
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Tamaño aleatorio entre 2px y 6px
+        const size = Math.random() * 4 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posición inicial aleatoria
+        particle.style.left = `${Math.random() * 100}%`;
+        
+        // Retraso de animación aleatorio
+        particle.style.animationDelay = `${Math.random() * 20}s`;
+        
+        // Duración de animación aleatoria
+        const duration = Math.random() * 10 + 15;
+        particle.style.animationDuration = `${duration}s`;
+        
+        container.appendChild(particle);
+      }
+    }
+    
+    // Crear partículas al cargar la página
+    window.addEventListener('load', createParticles);
+
+    // Funcionalidad del botón de perfil
+    const profileBtn = document.getElementById('profileBtn');
+
+    // Si profileBtn es un botón (antes), mantenemos comportamiento local; si es enlace, dejamos que navegue.
+    if (profileBtn && profileBtn.tagName.toLowerCase() === 'button') {
+      // Mantener compatibilidad por si otra página aún usa botón
+      const profileDropdown = document.getElementById('profileDropdown');
+      profileBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (profileDropdown) profileDropdown.classList.toggle('active');
+      });
+
+      document.addEventListener('click', function() {
+        if (profileDropdown) profileDropdown.classList.remove('active');
+      });
+
+      if (profileDropdown) {
+        profileDropdown.addEventListener('click', function(e) {
+          e.stopPropagation();
+        });
+      }
+
+      // Funciones auxiliares si aún existe el dropdown
+      window.manageProfile = function() {
+        alert('Gestión de tu perfil: Aquí puedes editar tu información personal.');
+        const pd = document.getElementById('profileDropdown'); if (pd) pd.classList.remove('active');
+      };
+
+      window.addProfile = function() {
+        alert('Añadir perfil: Aquí puedes crear un nuevo perfil.');
+        const pd = document.getElementById('profileDropdown'); if (pd) pd.classList.remove('active');
+      };
+
+      window.manageProfiles = function() {
+        alert('Gestión de perfiles: Aquí puedes administrar todos los perfiles.');
+        const pd = document.getElementById('profileDropdown'); if (pd) pd.classList.remove('active');
+      };
+    }
+  </script>
+  <script>
+    // Hacer que el botón de chat rojo dirija a indexregistro.html
+    const chatBtn = document.getElementById('chatBtn');
+    if (chatBtn) {
+      chatBtn.addEventListener('click', function(e) {
+          // Redirigir a index comentarios.html en la misma pestaña
+          e.preventDefault();
+          window.location.href = 'comentarios.html';
+        });
+    }
+  </script>
+  <script>
+    // Abrir modal al hacer clic en el botón de perfil (solo si sigue siendo un botón)
+    const _profileBtn = document.getElementById('profileBtn');
+    if (_profileBtn && _profileBtn.tagName.toLowerCase() === 'button') {
+      _profileBtn.addEventListener('click', function(e) {
+        const pd = document.getElementById('profileDropdown');
+        if (pd && !pd.classList.contains('active')) {
+          const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+          loginModal.show();
+        }
+      });
+    }
+  </script>
+</body>
+</html> 
